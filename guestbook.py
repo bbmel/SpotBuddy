@@ -46,7 +46,7 @@ def login():
 		if 'next' in session:
 			next = session['next']
 
-			if is_safe_url(next):
+			if is_safe_url(next) and next is not None:
 				return redirect(next)
 
 		return '<h1>You are now logged in!</h1>'
