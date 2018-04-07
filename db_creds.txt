@@ -1,3 +1,5 @@
+http://www.phpmyadmin.co/
+
 Host: sql9.freemysqlhosting.net
 Name: sql9230362
 Username: sql9230362
