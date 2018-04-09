@@ -1,9 +1,10 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Email, Length
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Thisisasecretkey!'
@@ -38,7 +39,13 @@ def login():
 
 	# checks if the form has been submitted
 	if form.validate_on_submit():
-		return '<h1>' + form.username.data + ' ' + form.password.data + '</h1>'
+		# since usernames are unique, the first result will be the username
+		user = User.query.filter_by(username=form.username.data).first() 
+		if user:
+			if check_password_hash(user.password, form.password.data):
+				return redirect(url_for('dashboard'))
+
+		return '<h1>Invalid username or password</h1>'
 
 
 
@@ -50,8 +57,9 @@ def signup():
 
 	# checks if the form has been submitted
 	if form.validate_on_submit():
+		hashed_password = generate_password_hash(form.password.data, method='sha256')
 		# save new user info in db
-		new_user = User(username=form.username.data, email=form.email.data, password=form.password.data)
+		new_user = User(username=form.username.data, email=form.email.data, password=hashed_password)
 		db.session.add(new_user)
 		db.session.commit()
 
