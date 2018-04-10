@@ -1,15 +1,22 @@
 body {
-  padding-top: 40px;
+  padding-top: 180px;
   padding-bottom: 40px;
-  background-color: #eee;
+  background-color: white;
+  background-image: url('dark_logo_transparent.svg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position:50% 10%;
+  background-size:38%;
 }
+
+
 
 .form-signin {
   max-width: 330px;
   padding: 15px;
   margin: 0 auto;
 }
-.form-signin .form-signin-heading,
+
 .form-signin .checkbox {
   margin-bottom: 10px;
 }
@@ -23,8 +30,9 @@ body {
      -moz-box-sizing: border-box;
           box-sizing: border-box;
   padding: 10px;
-  font-size: 16px;
+  font-size: 14px;
 }
+
 .form-signin .form-control:focus {
   z-index: 2;
 }
@@ -37,4 +45,11 @@ body {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
